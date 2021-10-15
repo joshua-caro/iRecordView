@@ -208,7 +208,7 @@ class BucketImageView: UIImageView, CAAnimationDelegate {
 
         animGroup.setValue(micUpAnimationName, forKey: animationNameKey)
         animGroup.animations = [moveAnimation, rotateAnimation]
-        animGroup.duration = 0.6;
+        animGroup.duration = 0.4;
         animGroup.isRemovedOnCompletion = false;
         animGroup.fillMode = CAMediaTimingFillMode.forwards
         micLayer.add(animGroup, forKey: micUpAnimationName)

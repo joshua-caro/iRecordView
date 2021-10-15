@@ -11,18 +11,19 @@ import UIKit
 open class RecordButton: UIButton, UIGestureRecognizerDelegate {
 
     public var recordView: RecordView!
-
-
+    
     private var mTransform: CGAffineTransform?
     private var buttonCenter, slideCenter: CGPoint?
 
     private var touchDownAndUpGesture: iGesutreRecognizer!
     private var moveGesture: UIPanGestureRecognizer!
+    private var moveUpGesture: UIPanGestureRecognizer!
 
     public var listenForRecord: Bool! {
         didSet {
             touchDownAndUpGesture.isEnabled = listenForRecord
             moveGesture.isEnabled = listenForRecord
+            moveUpGesture.isEnabled = listenForRecord
         }
     }
     //prevent color change (onClick) when adding the button using Storyboard
@@ -51,14 +52,13 @@ open class RecordButton: UIButton, UIGestureRecognizerDelegate {
         moveGesture = UIPanGestureRecognizer(target: self, action: #selector(touchMoved(_:)))
         moveGesture.delegate = self
 
-        
-
         touchDownAndUpGesture = iGesutreRecognizer(target: self, action: #selector(handleUpAndDown(_:)))
         touchDownAndUpGesture.delegate = self
 
 
         addGestureRecognizer(moveGesture)
         addGestureRecognizer(touchDownAndUpGesture)
+        
 
         if mTransform == nil {
             mTransform = transform
@@ -110,6 +110,7 @@ open class RecordButton: UIButton, UIGestureRecognizerDelegate {
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
         return (gestureRecognizer == touchDownAndUpGesture && otherGestureRecognizer == moveGesture) || (gestureRecognizer == moveGesture && otherGestureRecognizer == touchDownAndUpGesture)
     }
 

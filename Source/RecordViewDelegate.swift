@@ -12,6 +12,7 @@ import UIKit
     func onStart()
     func onCancel()
     func onFinished(duration: CGFloat)
+    func didSwipeToLock()
     @objc optional func onAnimationEnd()
 
 }
